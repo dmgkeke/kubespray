@@ -131,24 +131,25 @@
   tags:
     - services
 
-- name: reset | gather mounted kubelet dirs
-  shell: mount | grep /var/lib/kubelet/ | awk '{print $3}' | tac
-  args:
-    warn: false
-  check_mode: no
-  register: mounted_dirs
-  tags:
-    - mounts
+#- name: reset | gather mounted kubelet dirs  # noqa 301
+#  shell: set -o pipefail && mount | grep /var/lib/kubelet/ | awk '{print $3}' | tac
+#  args:
+#    executable: /bin/bash
+#    warn: false
+#  check_mode: no
+#  register: mounted_dirs
+#  tags:
+#    - mounts
 
-- name: reset | unmount kubelet dirs
-  command: umount -f {{ item }}
-  with_items: '{{ mounted_dirs.stdout_lines }}'
-  register: umount_dir
-  retries: 4
-  until: umount_dir.rc == 0
-  delay: 5
-  tags:
-    - mounts
+#- name: reset | unmount kubelet dirs  # noqa 301
+#  command: umount -f {{ item }}
+#  with_items: "{{ mounted_dirs.stdout_lines }}"
+#  register: umount_dir
+#  retries: 4
+#  until: umount_dir.rc == 0
+#  delay: 5
+#  tags:
+#    - mounts
 
 - name: flush iptables
   iptables:

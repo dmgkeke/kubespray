@@ -50,10 +50,10 @@
     name: "{{ sysctl_file_path | dirname }}"
     state: directory
 
-- name: Enable ip forwarding
-  sysctl:
-    sysctl_file: "{{ sysctl_file_path }}"
-    name: net.ipv4.ip_forward
-    value: 1
-    state: present
-    reload: yes
+#- name: Enable ip forwarding
+#  sysctl:
+#    sysctl_file: "{{ sysctl_file_path }}"
+#    name: net.ipv4.ip_forward
+#    value: 1
+#    state: present
+#    reload: yes
